@@ -1,0 +1,270 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1.0",
+        "title": "Power BI",
+        "description": "Power BI Connector",
+        "contact": {
+            "name": "Jeff Hollan"
+        },
+        "x-ms-api-annotation": {
+            "status": "Preview"
+        }
+    },
+    "host": "api.powerbi.com",
+    "basePath": "/v1.0/myorg",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/groups/{groupid}/datasets/{datasetid}/tables/{tablename}/rows": {
+            "post": {
+                "operationId": "AddRows",
+                "description": "Add rows to a streaming dataset",
+                "summary": "Add Rows (Streaming Dataset)",
+                "x-ms-visibility": "important",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/GroupIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/DatasetIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/TableIdParameter"
+                    },
+                    {
+                        "name": "Payload",
+                        "in": "body",
+                        "x-ms-summary": "Payload to send",
+                        "schema": {
+                            "$ref": "#/definitions/Payload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "ClearRows",
+                "description": "Clear all rows in a streaming dataset",
+                "summary": "Clear Rows (Streaming Dataset)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/GroupIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/DatasetIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/TableIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/groups": {
+            "get": {
+                "x-ms-visibility": "internal",
+                "operationId": "Groups_List",
+                "description": "Get Groups for Power BI",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/groups/{groupid}/datasets": {
+            "get": {
+                "x-ms-visibility": "internal",
+                "operationId": "Datasets_List",
+                "description": "Get Datasets for Power BI Group",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/GroupIdParameter"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/groups/{groupid}/datasets/{datasetid}/tables": {
+            "get": {
+                "x-ms-visibility": "internal",
+                "operationId": "Tables_List",
+                "description": "Get Datasets for Power BI Group",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/GroupIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/DatasetIdParameter"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/groups/{groupid}/datasets/{datasetid}/tables/{tablename}/columns": {
+            "get": {
+                "operationId": "GetColumns",
+                "description": "Get columns required",
+                "x-ms-visibility": "internal",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/GroupIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/DatasetIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/TableIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Columns"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Payload": {
+            "type": "object",
+            "properties": {},
+            "x-ms-dynamic-schema": {
+                "operationId": "GetColumns",
+                "parameters": {
+                    "groupid": {
+                        "parameter": "groupid"
+                    },
+                    "datasetid": {
+                        "parameter": "datasetid"
+                    },
+                    "tablename": {
+                        "parameter": "tablename"
+                    }
+                },
+                "value-path": "schema"
+            }
+        },
+        "Columns": {
+            "type": "object",
+            "properties": {
+                "schema": {
+                    "type": "object"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "GroupIdParameter": {
+            "name": "groupid",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Workspace ID",
+            "x-ms-summary": "Workspace",
+            "x-ms-dynamic-values": {
+                "operationId": "Groups_List",
+                "value-collection": "value",
+                "value-path": "id",
+                "value-title": "name"
+            }
+        },
+        "DatasetIdParameter": {
+            "name": "datasetid",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Dataset",
+            "description": "Dataset ID",
+            "x-ms-dynamic-values": {
+                "operationId": "Datasets_List",
+                "value-collection": "value",
+                "value-path": "id",
+                "value-title": "name",
+                "parameters": {
+                    "groupid": {
+                        "parameter": "groupid"
+                    }
+                }
+            }
+        },
+        "TableIdParameter": {
+            "name": "tablename",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Table",
+            "x-ms-dynamic-values": {
+                "operationId": "Tables_List",
+                "value-collection": "value",
+                "value-path": "name",
+                "value-title": "name",
+                "parameters": {
+                    "groupid": {
+                        "parameter": "groupid"
+                    },
+                    "datasetid": {
+                        "parameter": "datasetid"
+                    }
+                }
+            }
+        }
+    }
+}

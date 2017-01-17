@@ -1,0 +1,5 @@
+packages/
+DatahubCSteps/obj/
+DatahubCSteps/bin/
+DatahubCSteps/Properties/PublishProfiles/
+.vs/
