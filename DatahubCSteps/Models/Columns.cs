@@ -24,10 +24,10 @@ namespace DatahubCSteps.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Columns" /> class.
         /// </summary>
-        /// <param name="Schema">Schema.</param>
-        public Columns(Object Schema = null)
+        /// <param name="schema">Schema.</param>
+        public Columns(object schema = null)
         {
-            this.Schema = Schema;
+            this.Schema = schema;
             
         }
 
@@ -35,7 +35,7 @@ namespace DatahubCSteps.Models
         /// Gets or Sets Schema
         /// </summary>
         [DataMember(Name="schema")]
-        public Object Schema { get; set; }
+        public object Schema { get; set; }
 
 
         /// <summary>

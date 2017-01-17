@@ -29,14 +29,13 @@ namespace DatahubCSteps.Controllers
         [System.Web.Http.Route("GetParams/{xsl}")]
         [SwaggerOperation("GetParams")]
         [SwaggerResponse(200, type: typeof(Columns))]
-        public IActionResult GetParams([FromRoute]string xsl)
+        public Columns GetParams([FromRoute]string xsl)
         {
-            string exampleJson = Properties.Resources.Example;
+            var exampleJson = Properties.Resources.Example;
 
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<Columns>(exampleJson)
-            : default(Columns);
-            return new ObjectResult(example);
+
+            var example = JsonConvert.DeserializeObject<Columns>(exampleJson);
+            return example;
         }
 
         

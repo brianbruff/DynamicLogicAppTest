@@ -61,7 +61,39 @@ namespace DatahubCSteps.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to { &quot;name&quot; : &quot;brian&quot;, &quot;address&quot;:&quot;grange&quot;}.
+        ///   Looks up a localized string similar to {
+        ///	&quot;schema&quot;: {
+        ///		&quot;user&quot;: {
+        ///			&quot;type&quot;: &quot;object&quot;,
+        ///			&quot;required&quot;: [&quot;name&quot;],
+        ///			&quot;properties&quot;: {
+        ///				&quot;name&quot;: {
+        ///					&quot;type&quot;: &quot;string&quot;
+        ///				},
+        ///				&quot;address&quot;: {
+        ///					&quot;type&quot;: &quot;array&quot;,
+        ///					&quot;items&quot;: {
+        ///						&quot;$ref&quot;: &quot;#/schema/address&quot;
+        ///					}
+        ///				}
+        ///			}
+        ///		},
+        ///		&quot;address&quot;: {
+        ///			&quot;type&quot;: &quot;object&quot;,
+        ///			&quot;properties&quot;: {
+        ///				&quot;type&quot;: {
+        ///					&quot;type&quot;: &quot;string&quot;,
+        ///					&quot;enum&quot;: [&quot;home&quot;, &quot;office&quot;]
+        ///				},
+        ///				&quot;line1&quot;: {
+        ///					&quot;type&quot;: &quot;string&quot;
+        ///				}
+        ///			}
+        ///		}
+        ///	}
+        ///}
+        ///
+        ///					}.
         /// </summary>
         internal static string Example {
             get {
