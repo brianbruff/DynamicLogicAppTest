@@ -7,6 +7,7 @@ using Swashbuckle.Application;
 using Swashbuckle.Swagger;
 using WebActivatorEx;
 using DatahubCSteps;
+using DatahubCSteps.Models;
 using Newtonsoft.Json.Linq;
 using TRex.Metadata;
 
@@ -20,6 +21,13 @@ namespace DatahubCSteps
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
 
+            var vendorExtensions = new Dictionary<string, object>();
+
+            var obj = JObject.Parse(Properties.Resources.Extension);
+
+            //parameters.vendorExtensions.Add("x-ms-dynamic-schema", Properties.Resources.Extension.Replace("\\", "")); 
+            vendorExtensions.Add("x-ms-dynamic-schema", obj);
+
             GlobalConfiguration.Configuration
                 .EnableSwagger(c =>
                     {
@@ -28,10 +36,11 @@ namespace DatahubCSteps
 
                         c.SingleApiVersion("v1", "DatahubCSteps");
 
+                        c.MapType<Payload>(() => new Schema { type = "object", vendorExtensions = vendorExtensions});
 
 
                         //c.OperationFilter<AddDefaultResponse>();
-                        c.OperationFilter<ExtensionOperationFilter>();
+                        // c.OperationFilter<ExtensionOperationFilter>();
                         //c.ReleaseTheTRex();
 
 
