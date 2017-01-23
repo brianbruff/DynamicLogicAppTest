@@ -50,26 +50,26 @@ namespace DatahubCSteps
         }
     }
 
-    internal class ExtensionOperationFilter : IOperationFilter
-    {
-        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
-        {
+    //internal class ExtensionOperationFilter : IOperationFilter
+    //{
+    //    public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+    //    {
 
-            //if (operation.description)
-            if (operation.parameters != null)
-            {
-                // Select the capitalized parameter names
-                var parameters = operation.parameters.FirstOrDefault(p => p.name == "xslParams");
-                if (parameters == null) return;
+    //        //if (operation.description)
+    //        if (operation.parameters != null)
+    //        {
+    //            // Select the capitalized parameter names
+    //            var parameters = operation.parameters.FirstOrDefault(p => p.name == "xslParams");
+    //            if (parameters == null) return;
 
-                if (parameters.vendorExtensions == null)
-                    parameters.vendorExtensions = new Dictionary<string, object>();
+    //            if (parameters.vendorExtensions == null)
+    //                parameters.vendorExtensions = new Dictionary<string, object>();
 
-                var obj = JObject.Parse(Properties.Resources.Extension);
+    //            var obj = JObject.Parse(Properties.Resources.Extension);
 
-                //parameters.vendorExtensions.Add("x-ms-dynamic-schema", Properties.Resources.Extension.Replace("\\", "")); 
-                parameters.vendorExtensions.Add("x-ms-dynamic-schema", obj);
-            }
-        }
-    }
+    //            //parameters.vendorExtensions.Add("x-ms-dynamic-schema", Properties.Resources.Extension.Replace("\\", "")); 
+    //            parameters.vendorExtensions.Add("x-ms-dynamic-schema", obj);
+    //        }
+    //    }
+    //}
 }
