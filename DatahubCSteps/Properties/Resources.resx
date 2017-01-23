@@ -119,37 +119,21 @@
   </resheader>
   <data name="Example" xml:space="preserve">
     <value>{
-  "schema": {
-    "user": {
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "address": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "home",
-                  "office"
-                ]
-              },
-              "line1": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	"schema": {
+		"type": "object",
+		"properties": {
+			"Name": {
+				"type": "string"
+			},
+			"Desc": {
+				"type": "string"
+			},
+			"Age": {
+				"format": "int32",
+				"type": "integer"
+			}
+		}
+	}
 }</value>
   </data>
   <data name="Extension" xml:space="preserve">
